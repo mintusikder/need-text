@@ -3,6 +3,14 @@
 .env.* 
 !.env.example
 dist 
+<!-- Project Settings -->
+ pnpm init 
+ tsc --init 
+ pnpm add express 
+ pnpm add -D typescript @types/node @types/express tsx eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+ pnpm add -D tsx 
+ pnpm add dotenv 
+ pnpm build 
 <!-- scripts -->
 "start" : "node dist/server.js",
 "build" : "tsc",
