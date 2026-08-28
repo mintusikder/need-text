@@ -1,26 +1,72 @@
 <!-- .gitignore  -->
-.env .env.* !.env.example dist
+.env 
+.env.* 
+!.env.example
+dist 
 <!-- Project Settings -->
-pnpm init tsc --init pnpm add express pnpm add -D typescript @types/node
-@types/express pnpm add -D tsx pnpm add dotenv pnpm build
+ pnpm init 
+ tsc --init 
+ pnpm add express 
+ pnpm add -D typescript @types/node @types/express
+ pnpm add -D tsx 
+ pnpm add dotenv 
+ pnpm build 
 <!-- scripts -->
-"start" : "node dist/server.js", "build" : "tsc", "dev" : "tsx --watch
-src/server.ts", "lint": "eslint ./src/**/*",
+"start" : "node dist/server.js",
+"build" : "tsc",
+"dev" : "tsx --watch src/server.ts",
+"lint": "eslint ./src/**/*",
 <!-- Prisma Setting -->
-
+pnpm add -D prisma@7.10.0 @types/pg 
+pnpm add @prisma/client@7.10.0 @prisma/adapter-pg pg dotenv
+pnpm dlx prisma
+pnpm dlx prisma init --output ../generated/prisma
 <!-- tsconfig.json -->
-{ "compilerOptions": { "module": "commonjs", "rootDir": "./src", "outDir":
-"./dist", "strict": true, "esModuleInterop": true, "skipLibCheck": true,
-"forceConsistentCasingInFileNames": true }, }
-<!-- App.ts -->
-import express, { Application, Request, Response } from "express"; export const
-app: Application = express(); // Enable URL-encoded form data parsing
-app.use(express.urlencoded({ extended: true })); // Middleware to parse JSON
-bodies app.use(express.json()); // Basic route app.get('/', (req: Request, res:
-Response) => { res.send('Hello, TypeScript + Express!'); });
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2023",
+    "strict": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
 
-<!-- Server.ts -->
-// Start the server import { app } from "./app"; const boostApp = () => { try {
-app.listen(5000, () => { console.log("Server is running on
-http://localhost:5000"); }); } catch (err) { console.error("Error starting the
-server:", err); } }; boostApp();
+<!-- App.ts -->
+ import express, { Application, Request, Response } from "express";
+
+export const app: Application = express();
+
+// Enable URL-encoded form data parsing
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Basic route
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, TypeScript + Express!');
+});
+
+
+ <!-- Server.ts -->
+  // Start the server
+
+import { app } from "./app";
+
+const boostApp = () => {
+  try {
+    app.listen(5000, () => {
+      console.log("Server is running on http://localhost:5000");
+    });
+  } catch (err) {
+    console.error("Error starting the server:", err);
+  }
+};
+
+boostApp();
