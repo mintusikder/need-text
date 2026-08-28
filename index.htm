@@ -21,6 +21,8 @@ pnpm add -D prisma@7.10.0 @types/pg
 pnpm add @prisma/client@7.10.0 @prisma/adapter-pg pg dotenv
 pnpm dlx prisma
 pnpm dlx prisma init --output ../generated/prisma
+pnpm exec prisma migrate dev --name init
+pnpm exec prisma generate
 <!-- tsconfig.json -->
 {
   "compilerOptions": {
